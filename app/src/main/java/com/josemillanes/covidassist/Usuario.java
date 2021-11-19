@@ -5,16 +5,16 @@ import java.util.Map;
 
 public class Usuario {
 
-    private String userId;
+    private int userId;
     private String userName;
     private String userEmail;
     private String userImg;
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -42,7 +42,7 @@ public class Usuario {
         this.userImg = userImg;
     }
 
-    public Usuario(String userId, String userName, String userEmail, String userImg) {
+    public Usuario(int userId, String userName, String userEmail, String userImg) {
         this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;

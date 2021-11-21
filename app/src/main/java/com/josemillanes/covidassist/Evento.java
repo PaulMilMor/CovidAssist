@@ -8,21 +8,22 @@ import java.util.Map;
 
 public class Evento {
 
-    private String eventId;
+    private int eventId;
     private String eventTitle;
+    private String eventDescription;
     private String eventPlace;
     private Date eventDate;
     private String eventStatus;
     private int eventCapacity;
-    private String eventCreator;
+    private int eventCreator;
     private boolean eventContagio;
     private List<Usuario> eventAttendance;
 
-    public String getEventId() {
+    public int getEventId() {
         return eventId;
     }
 
-    public void setEventId(String eventId) {
+    public void setEventId(int eventId) {
         this.eventId = eventId;
     }
 
@@ -32,6 +33,14 @@ public class Evento {
 
     public void setEventTitle(String eventTitle) {
         this.eventTitle = eventTitle;
+    }
+
+    public String getEventDescription() {
+        return eventDescription;
+    }
+
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
     }
 
     public String getEventPlace() {
@@ -66,11 +75,11 @@ public class Evento {
         this.eventCapacity = eventCapacity;
     }
 
-    public String getEventCreator() {
+    public int getEventCreator() {
         return eventCreator;
     }
 
-    public void setEventCreator(String eventCreator) {
+    public void setEventCreator(int eventCreator) {
         this.eventCreator = eventCreator;
     }
 
@@ -90,9 +99,10 @@ public class Evento {
         this.eventAttendance = eventAttendance;
     }
 
-    public Evento(String eventId, String eventTitle, String eventPlace, Date eventDate, String eventStatus, int eventCapacity, String eventCreator, boolean eventContagio, List<Usuario> eventAttendance) {
+    public Evento(int eventId, String eventTitle, String eventDescription, String eventPlace, Date eventDate, String eventStatus, int eventCapacity, int eventCreator, boolean eventContagio, List<Usuario> eventAttendance) {
         this.eventId = eventId;
         this.eventTitle = eventTitle;
+        this.eventDescription = eventDescription;
         this.eventPlace = eventPlace;
         this.eventDate = eventDate;
         this.eventStatus = eventStatus;
@@ -102,8 +112,9 @@ public class Evento {
         this.eventAttendance = eventAttendance;
     }
 
-    public Evento(String eventTitle, String eventPlace, Date eventDate, String eventStatus, int eventCapacity, String eventCreator, boolean eventContagio, List<Usuario> eventAttendance) {
+    public Evento(String eventTitle, String eventDescription, String eventPlace, Date eventDate, String eventStatus, int eventCapacity, int eventCreator, boolean eventContagio, List<Usuario> eventAttendance) {
         this.eventTitle = eventTitle;
+        this.eventDescription = eventDescription;
         this.eventPlace = eventPlace;
         this.eventDate = eventDate;
         this.eventStatus = eventStatus;

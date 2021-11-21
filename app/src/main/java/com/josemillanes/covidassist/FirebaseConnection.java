@@ -127,7 +127,7 @@ public class FirebaseConnection {
                             for(QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("LIST",document.getData().toString());
                                 Usuario usuario = new Usuario(
-                                        document.getId(),
+                                        //document.getId(),
                                         document.getData().get("userName").toString(),
                                         document.getData().get("userEmail").toString(),
                                         document.getData().get("userImg").toString()
@@ -261,8 +261,8 @@ public class FirebaseConnection {
                         if(task.isSuccessful()) {
                             //Qué hacer si la operación es exitosa
                             for(QueryDocumentSnapshot document : task.getResult()) {
-                                Evento evento = new Evento(
-                                        document.getId(),
+                               /* Evento evento = new Evento(
+                               //         document.getId(),
                                         document.getData().get("eventTitle").toString(),
                                         document.getData().get("eventPlace").toString(),
                                         (Date)document.getData().get("eventDate"),
@@ -272,7 +272,7 @@ public class FirebaseConnection {
                                         (boolean) document.getData().get("eventContagio"),
                                         (List<Usuario>) document.getData().get("eventAttendance")
                                 );
-                                eventos.add(evento);
+                                eventos.add(evento);*/
                             }
                         } else {
                             //Qué hacer si la operación no es exitosa

@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_create_event.xml" value="0.33" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_main.xml" value="0.1453125" />
+        <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/menu/my_navigation_items.xml" value="0.225" />
       </map>
     </option>
   </component>

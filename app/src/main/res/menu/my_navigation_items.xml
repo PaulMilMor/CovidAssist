@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_home"
+        android:title="Inicio"
+        android:icon="@drawable/ic_launcher_foreground" />
+    <item android:id="@+id/action_myevents"
+        android:title="Mis Eventos"
+        android:icon="@drawable/ic_launcher_foreground" />
+    <item android:id="@+id/action_history"
+        android:title="Historial"
+        android:icon="@drawable/ic_launcher_foreground" />
+    <item android:id="@+id/action_profile"
+        android:title="Perfil"
+        android:icon="@drawable/ic_launcher_foreground" />
+</menu>

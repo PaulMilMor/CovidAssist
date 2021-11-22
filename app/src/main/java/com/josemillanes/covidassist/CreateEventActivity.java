@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,13 +29,14 @@ public class CreateEventActivity extends AppCompatActivity {
 
     private MyOpenHelper db;
 
-    private Button createEventButton = (Button) findViewById(R.id.create_event_button);
+    private Button createEventButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
-
+        db = new MyOpenHelper(this);
+        createEventButton = (Button) findViewById(R.id.create_event_button);
         titleText = (EditText) findViewById(R.id.title_text);
         descriptionText = (EditText) findViewById(R.id.description_text);
         placeText = (EditText) findViewById(R.id.place_text);
@@ -77,6 +79,8 @@ public class CreateEventActivity extends AppCompatActivity {
                         attendants
                 );
                 db.insertEvento(evento);
+                Toast.makeText(CreateEventActivity.this,"Se creó el evento", Toast.LENGTH_SHORT).show();
+                onBackPressed();
             }
         });
 

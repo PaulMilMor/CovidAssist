@@ -37,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        eventos = db.getEventos();
+        EventoAdapter eventoAdapter = new EventoAdapter(this,R.layout.evento_list_item,eventos,db);
+
+    }
+
     private void setupBottomMenu(Bundle savedInstanceState) {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {

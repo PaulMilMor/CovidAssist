@@ -1,6 +1,7 @@
 package com.josemillanes.covidassist.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.josemillanes.covidassist.CreateEventActivity;
 import com.josemillanes.covidassist.Evento;
 import com.josemillanes.covidassist.EventoAdapter;
 import com.josemillanes.covidassist.MyOpenHelper;
@@ -23,6 +26,8 @@ public class EventosFragment extends Fragment {
     private ArrayList<Evento> eventos;
     private MyOpenHelper db;
     private Activity context;
+
+    private FloatingActionButton nuevoEventoButton;
 
     public EventosFragment(ArrayList<Evento> eventos, MyOpenHelper db, Activity context) {
         this.eventos = eventos;
@@ -47,7 +52,25 @@ public class EventosFragment extends Fragment {
         EventoAdapter eventoAdapter = new EventoAdapter(context, R.layout.evento_list_item, eventos, db);
         eventosListView.setEmptyView(layout.findViewById(R.id.empty));
         eventosListView.setAdapter(eventoAdapter);
+
+        nuevoEventoButton = (FloatingActionButton) layout.findViewById(R.id.nuevo_evento_button);
+        nuevoEventoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentForm = new Intent(context, CreateEventActivity.class);
+                startActivity(intentForm);
+            }
+        });
+
         return layout;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        eventos = db.getEventos();
+        EventoAdapter eventoAdapter = new EventoAdapter(context,R.layout.evento_list_item,eventos,db);
+        eventosListView.setAdapter(eventoAdapter);
     }
 
 }

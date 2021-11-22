@@ -99,17 +99,17 @@ public class Evento {
         this.eventAttendance = eventAttendance;
     }
 
-    public Evento(int eventId, String eventTitle, String eventDescription, String eventPlace, Date eventDate, String eventStatus, int eventCapacity, int eventCreator, boolean eventContagio, List<Usuario> eventAttendance) {
-        this.eventId = eventId;
-        this.eventTitle = eventTitle;
-        this.eventDescription = eventDescription;
-        this.eventPlace = eventPlace;
-        this.eventDate = eventDate;
-        this.eventStatus = eventStatus;
-        this.eventCapacity = eventCapacity;
-        this.eventCreator = eventCreator;
-        this.eventContagio = eventContagio;
-        this.eventAttendance = eventAttendance;
+    public Evento(int eventId, String eventTitle, String eventDescription, String eventPlace, Date eventDate, String eventStatus, int eventCapacity, int eventCreator, boolean eventContagio) {
+        this.eventId = eventId;                     //int
+        this.eventTitle = eventTitle;               //String
+        this.eventDescription = eventDescription;   //String
+        this.eventPlace = eventPlace;               //String
+        this.eventDate = eventDate;                 //Date
+        this.eventStatus = eventStatus;             //String
+        this.eventCapacity = eventCapacity;         //int
+        this.eventCreator = eventCreator;           //int
+        this.eventContagio = eventContagio;         //bool
+        //this.eventAttendance = eventAttendance;     //List<Usuario>
     }
 
     public Evento(String eventTitle, String eventDescription, String eventPlace, Date eventDate, String eventStatus, int eventCapacity, int eventCreator, boolean eventContagio, List<Usuario> eventAttendance) {

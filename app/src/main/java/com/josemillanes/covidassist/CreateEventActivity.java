@@ -3,6 +3,7 @@ package com.josemillanes.covidassist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,8 @@ public class CreateEventActivity extends AppCompatActivity {
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private Date selectedDate;
 
+    private Evento editedEvento;
+
     private MyOpenHelper db;
 
     private Button createEventButton;
@@ -45,6 +48,9 @@ public class CreateEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
+                if(editedEvento != null) {
+                    cal.setTime(editedEvento.getEventDate());
+                }
                 int currentYear = cal.get(Calendar.YEAR);
                 int currentMonth = cal.get(Calendar.MONTH);
                 int currentDay = cal.get(Calendar.DAY_OF_MONTH);
@@ -65,24 +71,49 @@ public class CreateEventActivity extends AppCompatActivity {
         createEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<Usuario> attendants = new ArrayList<>();
-                Evento evento = new Evento(
-                        titleText.getText().toString(),
-                        descriptionText.getText().toString(),
-                        placeText.getText().toString(),
-                        selectedDate,
-                        "Planeado",
-                        Integer.parseInt(capacityText.getText().toString()),
-                        //Aquí es necesario obtener el id del usuario que crea el evento
-                        1,
-                        false,
-                        attendants
-                );
-                db.insertEvento(evento);
-                Toast.makeText(CreateEventActivity.this,"Se creó el evento", Toast.LENGTH_SHORT).show();
+                if(editedEvento == null) {
+                    List<Usuario> attendants = new ArrayList<>();
+                    Evento evento = new Evento(
+                            titleText.getText().toString(),
+                            descriptionText.getText().toString(),
+                            placeText.getText().toString(),
+                            selectedDate,
+                            "Planeado",
+                            Integer.parseInt(capacityText.getText().toString()),
+                            //Aquí es necesario obtener el id del usuario que crea el evento
+                            1,
+                            false,
+                            attendants
+                    );
+                    db.insertEvento(evento);
+                    Toast.makeText(CreateEventActivity.this,"Se creó el evento", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    editedEvento.setEventTitle(titleText.getText().toString());
+                    editedEvento.setEventDescription(descriptionText.getText().toString());
+                    editedEvento.setEventPlace(placeText.getText().toString());
+                    editedEvento.setEventDate(selectedDate);
+                    editedEvento.setEventCapacity(Integer.parseInt(capacityText.getText().toString()));
+                    db.updateEvento(editedEvento);
+                    Toast.makeText(CreateEventActivity.this, "Se editó el evento", Toast.LENGTH_SHORT).show();
+                }
+
                 onBackPressed();
             }
         });
+
+        Intent intent = getIntent();
+        editedEvento = (Evento) intent.getSerializableExtra("evento");
+        if(editedEvento != null) {
+            titleText.setText(editedEvento.getEventTitle());
+            //No existe el campo descripción en la base de datos
+            descriptionText.setText(editedEvento.getEventTitle());
+            placeText.setText(editedEvento.getEventPlace());
+            selectedDate = editedEvento.getEventDate();
+            capacityText.setText(""+editedEvento.getEventCapacity());
+            createEventButton.setText("Editar Evento");
+        }
+
 
     }
 }

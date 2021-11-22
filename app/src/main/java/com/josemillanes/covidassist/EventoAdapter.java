@@ -2,6 +2,7 @@ package com.josemillanes.covidassist;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -90,6 +91,9 @@ public class EventoAdapter extends BaseAdapter {
                     case R.id.opcion_contagio:
                         break;
                     case R.id.opcion_editar:
+                        Intent intentForm = new Intent(menuContext, CreateEventActivity.class);
+                        intentForm.putExtra("evento",evento);
+                        menuContext.startActivity(intentForm);
                         break;
                     case R.id.opcion_eliminar:
                         Toast.makeText(context, "Se eliminó el evento", Toast.LENGTH_SHORT).show();

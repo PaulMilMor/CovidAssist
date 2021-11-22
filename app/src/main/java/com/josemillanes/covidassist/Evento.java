@@ -1,12 +1,13 @@
 package com.josemillanes.covidassist;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Evento {
+public class Evento implements Serializable {
 
     private int eventId;
     private String eventTitle;

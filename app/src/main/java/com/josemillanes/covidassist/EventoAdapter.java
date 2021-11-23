@@ -85,6 +85,8 @@ public class EventoAdapter extends BaseAdapter {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch(menuItem.getItemId()) {
                     case R.id.opcion_asistencia:
+                        Intent intentCuestionario = new Intent(menuContext, CuestionarioActivity.class);
+                        menuContext.startActivity(intentCuestionario);
                         break;
                     case R.id.opcion_asistentes:
                         break;

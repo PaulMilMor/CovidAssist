@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".CuestionarioActivity"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/pregunta1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="¿Ha convivido con personas positivas de covid en los últimos 14 días?"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/pregunta1"
+            app:layout_constraintTop_toBottomOf="@+id/pregunta1">
+
+            <RadioButton
+                android:id="@+id/pregunta1YesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Si" />
+
+            <RadioButton
+                android:id="@+id/pregunta1NoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="No" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/pregunta2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="¿En los últimos 7 días ha tenido alguno de los siguientes sintomas? Marque todos los que apliquen."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/radioGroup"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Escalofrios"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escalofríos"
+            app:layout_constraintStart_toStartOf="@+id/pregunta2"
+            app:layout_constraintTop_toBottomOf="@+id/pregunta2" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Muscular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dolor Muscular"
+            app:layout_constraintStart_toStartOf="@+id/pregunta2Escalofrios"
+            app:layout_constraintTop_toBottomOf="@+id/pregunta2Escalofrios" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Toracico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dolor Torácico"
+            app:layout_constraintStart_toStartOf="@+id/pregunta2Muscular"
+            app:layout_constraintTop_toBottomOf="@+id/pregunta2Muscular" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Irritacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Irritación en los ojos"
+            app:layout_constraintStart_toStartOf="@+id/pregunta2Toracico"
+            app:layout_constraintTop_toBottomOf="@+id/pregunta2Toracico" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Cabeza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dolor de cabeza"
+            app:layout_constraintStart_toStartOf="@+id/pregunta2Irritacion"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Fiebre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fiebre"
+            tools:layout_editor_absoluteX="197dp"
+            tools:layout_editor_absoluteY="256dp" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Insipidez"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comida sin sabor o sabor extraño" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Tos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tos seca repentina" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Garganta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dolor de gargata al pasar saliva o alimento" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Aire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Falta de aire al hablar" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Olfato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Falta de olfato" />
+
+        <CheckBox
+            android:id="@+id/pregunta2Articulaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dolor en articulaciones" />
+
+        <TextView
+            android:id="@+id/pregunta3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¿Tiene alguno de estos síntomas? Dificultad para respirar, coloración morada de la piel, dolor intensivo en el pecho, aumento excesivo en la producción de moco y flema, confusión mental y desmayo, vómito, diarrea persistente, fiebre alta de difícil control" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/pregunta3YesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Si" />
+
+            <RadioButton
+                android:id="@+id/pregunta3NoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="No" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/pregunta4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¿Padece alguna de estas enfermedades? Marque todas las que apliquen" />
+
+        <CheckBox
+            android:id="@+id/pregunta4Diabetes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Diabetes" />
+
+        <CheckBox
+            android:id="@+id/pregunta4Presion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Presión alta" />
+
+        <CheckBox
+            android:id="@+id/pregunta4Corazon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enfermedades del corazón" />
+
+        <CheckBox
+            android:id="@+id/pregunta4Renal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enfermedad renal" />
+
+        <CheckBox
+            android:id="@+id/pregunta4Pulmon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enfermedades pulmonares crónicas" />
+
+        <CheckBox
+            android:id="@+id/pregunta4Cancer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cáncer" />
+
+        <CheckBox
+            android:id="@+id/pregunta4Inmuno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inmunocompromiso" />
+
+        <CheckBox
+            android:id="@+id/pregunta4Vih"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VIH" />
+
+        <Button
+            android:id="@+id/enviarCuestionarioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Evaluar Cuestionario" />
+
+    </LinearLayout>
+    <!--/androidx.constraintlayout.widget.ConstraintLayout-->
+</ScrollView>

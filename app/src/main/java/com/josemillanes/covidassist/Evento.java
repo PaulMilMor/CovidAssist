@@ -110,7 +110,7 @@ public class Evento implements Serializable {
         this.eventCapacity = eventCapacity;         //int
         this.eventCreator = eventCreator;           //int
         this.eventContagio = eventContagio;         //bool
-        //this.eventAttendance = eventAttendance;     //List<Usuario>
+        //this.eventAttendance = eventAttendance;   //List<Usuario>
     }
 
     public Evento(String eventTitle, String eventDescription, String eventPlace, Date eventDate, String eventStatus, int eventCapacity, int eventCreator, boolean eventContagio, List<Usuario> eventAttendance) {

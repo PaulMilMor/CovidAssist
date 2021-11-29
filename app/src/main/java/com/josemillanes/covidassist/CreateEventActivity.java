@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class CreateEventActivity extends AppCompatActivity {
 
+    private TextView titleView;
     private EditText titleText;
     private EditText descriptionText;
     private EditText placeText;
@@ -29,6 +31,7 @@ public class CreateEventActivity extends AppCompatActivity {
     private Date selectedDate;
 
     private Evento editedEvento;
+    private Usuario usuario;
 
     private MyOpenHelper db;
 
@@ -39,6 +42,7 @@ public class CreateEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
         db = new MyOpenHelper(this);
+        titleView = (TextView)  findViewById(R.id.title_view);
         createEventButton = (Button) findViewById(R.id.create_event_button);
         titleText = (EditText) findViewById(R.id.title_text);
         descriptionText = (EditText) findViewById(R.id.description_text);
@@ -81,7 +85,7 @@ public class CreateEventActivity extends AppCompatActivity {
                             "Planeado",
                             Integer.parseInt(capacityText.getText().toString()),
                             //Aquí es necesario obtener el id del usuario que crea el evento
-                            1,
+                            usuario.getUserId(),
                             false,
                             attendants
                     );
@@ -105,14 +109,17 @@ public class CreateEventActivity extends AppCompatActivity {
         Intent intent = getIntent();
         editedEvento = (Evento) intent.getSerializableExtra("evento");
         if(editedEvento != null) {
+            titleView.setText("Editar Evento");
             titleText.setText(editedEvento.getEventTitle());
             //No existe el campo descripción en la base de datos
-            descriptionText.setText(editedEvento.getEventTitle());
+            descriptionText.setText(editedEvento.getEventDescription());
             placeText.setText(editedEvento.getEventPlace());
             selectedDate = editedEvento.getEventDate();
             capacityText.setText(""+editedEvento.getEventCapacity());
             createEventButton.setText("Editar Evento");
         }
+        usuario = (Usuario) intent.getSerializableExtra("usuario");
+
 
 
     }

@@ -3,6 +3,7 @@ package com.josemillanes.covidassist;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -10,7 +11,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MyOpenHelper extends SQLiteOpenHelper {
+public class MyOpenHelper  {
 
     private static final String USERS_TABLE_CREATE = "CREATE TABLE usuarios (usuario_id INTEGER PRIMARY KEY AUTOINCREMENT, usuario_nombre TEXT, usuario_correo TEXT, usuario_contraseña TEXT, usuario_img BLOB )";
     private static final String EVENTS_TABLE_CREATE = "CREATE TABLE eventos (evento_id INTEGER PRIMARY KEY AUTOINCREMENT, evento_titulo TEXT, evento_lugar TEXT, evento_fecha INTEGER, evento_status STRING, evento_maxcap INTEGER, evento_creador INTEGER, evento_contagio INTEGER)";
@@ -22,38 +23,51 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private SQLiteDatabase db;
     private Context myContext;
+    public static  final String IMAGE = "usuario_img";
+    private DatabaseHelper DbHelper;
 
-    public MyOpenHelper(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
-        db = this.getWritableDatabase();
-       // db.execSQL(EVENTS_TABLE_INSERT);
+    static class DatabaseHelper extends SQLiteOpenHelper{
+        DatabaseHelper(Context context){
+            super(context, DB_NAME,null, DB_VERSION);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL(USERS_TABLE_CREATE);
+            db.execSQL(EVENTS_TABLE_CREATE);
+            db.execSQL(ASSISTANCE_TABLE_CREATE);
+            // db.execSQL(EVENTS_TABLE_INSERT);
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+        }
+
+        public int login(String u, String p){
+            int a=0;
+            SQLiteDatabase db;
+            db = this.getWritableDatabase();
+            Cursor cr = db.rawQuery("select usuario_correo, usuario_contraseña from usuarios", null);
+            if (cr!=null && cr.moveToFirst()){
+                do{
+                    if (cr.getString(0).equals(u) && cr.getString(1).equals(p)){
+                        a++;
+                    }
+                } while (cr.moveToNext());
+            }
+            return a;
+        }
+    }
+
+    public  MyOpenHelper(Context context){
         myContext = context;
+        DbHelper = new DatabaseHelper(context);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(USERS_TABLE_CREATE);
-        db.execSQL(EVENTS_TABLE_CREATE);
-        db.execSQL(ASSISTANCE_TABLE_CREATE);
-       // db.execSQL(EVENTS_TABLE_INSERT);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
-    }
 
     //Métodos para insertar, actualizar y eliminar usuarios y eventos
     //Para leer las tablas hay distintos casos así que se crearán los métodos sobre la marcha
-
-    public void insertUsuario(Usuario usuario) {
-        ContentValues cv = new ContentValues();
-        cv.put("usuario_nombre",usuario.getUserName());
-        cv.put("usuario_correo",usuario.getUserEmail());
-        //Nota: tal vez sea necesario cambiar el tipo de useriImg
-        cv.put("usuario_img", usuario.getUserImg());
-        db.insert("usuarios",null,cv);
-    }
 
     public void updateUsuario(Usuario usuario) {
         ContentValues cv = new ContentValues();
@@ -133,6 +147,36 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         return eventos;
     }
 
+    //Resgitrar usuario
 
+    public MyOpenHelper open() throws SQLException {
+        db = DbHelper.getWritableDatabase();
+        return this;
+    }
 
+    public void close(){
+        DbHelper.close();
+    }
+
+    public void insertUsuario(String nombre, String correo, String contra, byte[] imageBytes){
+        ContentValues cv = new ContentValues();
+        cv.put("usuario_nombre",nombre);
+        cv.put("usuario_correo",correo);
+        cv.put("usuario_contraseña",contra);
+        cv.put("usuario_img", imageBytes);
+        db.insert("usuarios",null,cv);
+    }
+
+    public byte[] recuperarImagen(){
+        Cursor cur = db.query(true,"usuarios", new String[]{IMAGE,},
+                null,null,null,null,"id"+" DESC","1");
+
+        if (cur.moveToFirst()){
+            byte[] blob = cur.getBlob(cur.getColumnIndex(IMAGE));
+            cur.close();
+            return blob;
+        }
+        cur.close();
+        return null;
+    }
 }

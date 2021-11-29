@@ -54,7 +54,6 @@ public class Usuario {
         this.userImg = userImg;
     }
 
-
     //Este método se usa cuando se quiera añadir un usuario a Firestore
     public Map<String, Object> toMap() {
         Map<String, Object> userMap = new HashMap<>();

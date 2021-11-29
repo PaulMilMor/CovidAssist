@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.josemillanes.covidassist.fragments.EventosFragment;
+import com.josemillanes.covidassist.fragments.ProfileFragment;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         eventos = db.getEventos();
         EventoAdapter eventoAdapter = new EventoAdapter(this,R.layout.evento_list_item,eventos,db);
-
     }
 
     private void setupBottomMenu(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     showFragment(PageFragment.newInstance(R.drawable.ic_baseline_history_24));
                     break;
                 case R.id.action_profile:
-                    showFragment(PageFragment.newInstance(R.drawable.ic_baseline_account_circle_24));
+                    showFragment(new ProfileFragment());
                     break;
             }
             return true;

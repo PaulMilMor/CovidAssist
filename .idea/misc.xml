@@ -3,19 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_create_event.xml" value="0.12771739130434784" />
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_cuestionario.xml" value="0.12771739130434784" />
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/evento_list_item.xml" value="0.25" />
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/fragment_eventos.xml" value="0.18" />
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/fragment_page.xml" value="0.12771739130434784" />
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/menu/my_navigation_items.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/menu/opcion_evento_items.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_create_event.xml" value="0.33" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_cuestionario.xml" value="0.17753623188405798" />
+        <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_log_in.xml" value="0.1453125" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_main.xml" value="0.25437693099897013" />
+        <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_registrar.xml" value="0.25" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/event_list_item.xml" value="0.67" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/evento_list_item.xml" value="0.25" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/fragment.xml" value="0.1503623188405797" />
@@ -27,7 +20,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

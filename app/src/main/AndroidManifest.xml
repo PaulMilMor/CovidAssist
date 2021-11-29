@@ -3,6 +3,8 @@
     package="com.josemillanes.covidassist">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,19 +14,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CovidAssist">
         <activity
-            android:name=".CuestionarioActivity"
-            android:exported="true" />
-        <activity
-            android:name=".CreateEventActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".LogInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".RegistrarActivity"
+            android:exported="true"
+            android:parentActivityName=".LogInActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LogInActivity" />
+        </activity>
+        <activity
+            android:name=".CuestionarioActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CreateEventActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity">
+
         </activity>
     </application>
 

@@ -3,11 +3,13 @@ package com.josemillanes.covidassist;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.josemillanes.covidassist.fragments.EventosFragment;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MyOpenHelper db;
     private ArrayList<Evento> eventos;
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
         db = new MyOpenHelper(this);
         eventos = db.getEventos();
         setupBottomMenu(savedInstanceState);
+        Intent intent = getIntent();
+        usuario = (Usuario) intent.getSerializableExtra("usuario");
+        if(usuario != null) {
+            Toast.makeText(this, usuario.getUserEmail(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -42,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         eventos = db.getEventos();
         EventoAdapter eventoAdapter = new EventoAdapter(this,R.layout.evento_list_item,eventos,db);
+
     }
 
     private void setupBottomMenu(Bundle savedInstanceState) {

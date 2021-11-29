@@ -95,8 +95,8 @@ public class RegistrarActivity extends AppCompatActivity {
                         showMessage("Bienvenido");
                         imagenUsuario.setImageURI(selectImageUri);
 
-                    //    Intent in = new Intent (RegistrarActivity.this,MainActivity.class);
-                      //  startActivity(in);
+                        Intent in = new Intent (RegistrarActivity.this,MainActivity.class);
+                        startActivity(in);
                     }
             }
 

@@ -1,13 +1,15 @@
 package com.josemillanes.covidassist;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
     private int userId;
     private String userName;
     private String userEmail;
+    private String userPassword;
     private String userImg;
 
     public int getUserId() {
@@ -42,6 +44,14 @@ public class Usuario {
         this.userImg = userImg;
     }
 
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
     public Usuario(int userId, String userName, String userEmail, String userImg) {
         this.userId = userId;
         this.userName = userName;
@@ -53,15 +63,12 @@ public class Usuario {
         this.userEmail = userEmail;
         this.userImg = userImg;
     }
-
-    //Este método se usa cuando se quiera añadir un usuario a Firestore
-    public Map<String, Object> toMap() {
-        Map<String, Object> userMap = new HashMap<>();
-        userMap.put("userName", userName);
-        userMap.put("userEmail", userEmail);
-        userMap.put("userImg", userImg);
-        return userMap;
+    public Usuario(int id, String userEmail, String userPassword) {
+        this.userId = id;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
     }
+
 
 
 

@@ -143,7 +143,7 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
     public ArrayList<Evento> getEventos() {
         ArrayList<Evento> eventos = new ArrayList<>();
-        Cursor c = db.rawQuery("select evento_id, evento_titulo, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio from eventos",null);
+        Cursor c = db.rawQuery("select evento_id, evento_titulo,evento_descripcion, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio from eventos",null);
         if(c != null && c.getCount() > 0) {
             c.moveToFirst();
             Log.d("DEBUGGEATE",c.toString());
@@ -160,6 +160,7 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
                         c.getString(5),
                         c.getInt(6),
                         c.getInt(7),
+
                         c.getInt(8) == 1
                 );
                 eventos.add(evento);

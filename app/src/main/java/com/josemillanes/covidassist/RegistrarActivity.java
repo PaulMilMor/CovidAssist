@@ -92,10 +92,14 @@ public class RegistrarActivity extends AppCompatActivity {
                     showMessage("Te falto llenar los datos ");
                 }else{
                     if (guardarImagen(selectImageUri)){
+                        MyOpenHelper.DatabaseHelper innerHelper = new MyOpenHelper.DatabaseHelper(RegistrarActivity.this);
+                        int[] results = innerHelper.login(correoUsuario.getText().toString(), contraseñaUsuario.getText().toString());
+                        Usuario usuario = new Usuario(results[1],correoUsuario.getText().toString(),contraseñaUsuario.getText().toString());
                         showMessage("Bienvenido");
                         imagenUsuario.setImageURI(selectImageUri);
 
                         Intent in = new Intent (RegistrarActivity.this,MainActivity.class);
+                        in.putExtra("usuario", usuario);
                         startActivity(in);
                     }
             }

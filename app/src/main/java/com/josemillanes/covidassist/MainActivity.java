@@ -37,12 +37,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         db = new MyOpenHelper(this);
         eventos = db.getEventos();
-        setupBottomMenu(savedInstanceState);
         Intent intent = getIntent();
         usuario = (Usuario) intent.getSerializableExtra("usuario");
         if(usuario != null) {
             Toast.makeText(this, usuario.getUserEmail(), Toast.LENGTH_SHORT).show();
         }
+        setupBottomMenu(savedInstanceState);
+
     }
 
     @Override
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.action_home:
                    //showFragment(new EventosFragment());
-                    showFragment(new EventosFragment(eventos, db,this));
+                    showFragment(new EventosFragment(eventos, db,usuario,this));
                     //showFragment(PageFragment.newInstance(R.drawable.ic_baseline_home_24));
                     break;
                 case R.id.action_myevents:

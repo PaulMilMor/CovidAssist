@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_create_event.xml" value="0.12771739130434784" />
         <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_cuestionario.xml" value="0.12771739130434784" />
+        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_evento_details.xml" value="0.25" />
         <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
+        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_ver.xml" value="0.18206521739130435" />
         <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/evento_list_item.xml" value="0.25" />
         <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/fragment_eventos.xml" value="0.18" />
         <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/fragment_page.xml" value="0.12771739130434784" />

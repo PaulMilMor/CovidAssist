@@ -7,7 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.josemillanes.covidassist.fragments.EventosFragment;
@@ -19,7 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity<eventoAdapter> extends AppCompatActivity {
 
 
     private static final String SELECTION = "SELECTION";
@@ -86,5 +91,4 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putInt(SELECTION, bottomNavigationView.getSelectedItemId());
     }
-
 }

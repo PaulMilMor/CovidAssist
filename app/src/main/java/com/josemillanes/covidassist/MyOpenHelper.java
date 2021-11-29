@@ -20,6 +20,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "eventos.sqlite";
     private static final int DB_VERSION = 1;
+
     private SQLiteDatabase db;
     private Context myContext;
 
@@ -73,6 +74,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     }
 
 
+
     public void insertEvento(Evento evento) {
         ContentValues cv = new ContentValues();
         cv.put("evento_titulo",evento.getEventTitle());
@@ -104,6 +106,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         String[] args = new String[]{String.valueOf(id)};
         db.delete("eventos","evento_id=?",args);
     }
+
 
     public ArrayList<Evento> getEventos() {
         ArrayList<Evento> eventos = new ArrayList<>();

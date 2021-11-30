@@ -205,6 +205,7 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
                         c.getInt(8) == 1
                 );
+                evento.setEventAttendance(getAsistencia(evento.getEventId()));
                 eventos.add(evento);
             } while(c.moveToNext());
         }

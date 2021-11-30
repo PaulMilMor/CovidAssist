@@ -52,11 +52,16 @@ public class CuestionarioActivity extends AppCompatActivity implements View.OnCl
     private Button enviarCuestionarioButton;
 
     private Usuario usuario;
+    private Evento evento;
+    private MyOpenHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuestionario);
+
+        db = new MyOpenHelper(this);
+
         pregunta1YesButton = findViewById(R.id.pregunta1YesButton);
         pregunta1YesButton.setOnClickListener(this);
         pregunta1NoButton = findViewById(R.id.pregunta1NoButton);
@@ -161,6 +166,7 @@ public class CuestionarioActivity extends AppCompatActivity implements View.OnCl
 
         Intent intent = getIntent();
         usuario = (Usuario) intent.getSerializableExtra("usuario");
+        evento = (Evento) intent.getSerializableExtra("evento");
 
     }
     //método para cuando el usuario no asistirá al evento
@@ -171,6 +177,7 @@ public class CuestionarioActivity extends AppCompatActivity implements View.OnCl
 
     //método para cuando el usuario asistirá al evento
     private void asistir() {
+        db.marcarAsistencia(usuario.getUserId(), evento.getEventId());
         onBackPressed();
 
     }

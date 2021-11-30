@@ -57,7 +57,7 @@ public class EventoAdapter extends BaseAdapter {
         String currentTitle = eventos.get(position).getEventTitle();
         String currentDate = dateFormat.format(eventos.get(position).getEventDate());
         String currentStatus = eventos.get(position).getEventStatus();
-        String currentAsistentes = "Asistentes: " + 0 + "/" + eventos.get(position).getEventCapacity();
+        String currentAsistentes = "Asistentes: " + eventos.get(position).getEventAttendance()+ "/" + eventos.get(position).getEventCapacity();
 
         TextView tituloText = (TextView) v.findViewById(R.id.evento_titulo);
         TextView fechaText = (TextView) v.findViewById(R.id.evento_fecha);
@@ -92,8 +92,15 @@ public class EventoAdapter extends BaseAdapter {
                         menuContext.startActivity(intentdetails);
                         break;
                     case R.id.opcion_asistencia:
-                        Intent intentCuestionario = new Intent(menuContext, CuestionarioActivity.class);
-                        menuContext.startActivity(intentCuestionario);
+                        if(evento.getEventAttendance() < evento.getEventCapacity()) {
+                            Intent intentCuestionario = new Intent(menuContext, CuestionarioActivity.class);
+                            intentCuestionario.putExtra("usuario", usuario);
+                            intentCuestionario.putExtra("evento",evento);
+                            menuContext.startActivity(intentCuestionario);
+
+                        } else {
+                            Toast.makeText(context, "Este evento ya alcanzó su máxima capacidad", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case R.id.opcion_asistentes:
                         break;

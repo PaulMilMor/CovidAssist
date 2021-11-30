@@ -208,6 +208,37 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
                         c.getInt(8) == 1
                 );
+                evento.setEventAttendance(getAsistencia(evento.getEventId()));
+                eventos.add(evento);
+            } while(c.moveToNext());
+        }
+        c.close();
+        return eventos;
+    }
+
+    public ArrayList<Evento> getHistoryEventos(int usuarioId) {
+        ArrayList<Evento> eventos = new ArrayList<>();
+        Cursor c = db.rawQuery("select * from eventos as e inner join asistencia as a where e.evento_id = a.evento_id and a.usuario_id="+usuarioId+" order by evento_fecha ASC",null);
+        if(c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            Log.d("DEBUGGEATE",c.toString());
+            do {
+              /*  Log.d("DEBUGGEATE",c.toString());
+                int id = c.getInt(0);
+                Log.d("DASDAS", String.valueOf(id));*/
+                Evento evento = new Evento(
+                        c.getInt(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        new Date(c.getLong(4)),
+                        c.getString(5),
+                        c.getInt(6),
+                        c.getInt(7),
+
+                        c.getInt(8) == 1
+                );
+                evento.setEventAttendance(getAsistencia(evento.getEventId()));
                 eventos.add(evento);
             } while(c.moveToNext());
         }

@@ -14,6 +14,19 @@
         <!-- Customize your theme here. -->
     </style>
 
+
+    <style name="Theme.CovidAssist.Fullscreen" parent="Theme.CovidAssist">
+        <item name="android:actionBarStyle">@style/Widget.Theme.CovidAssist.ActionBar.Fullscreen
+        </item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="ThemeOverlay.CovidAssist.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
+
     <style name="TextTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/gray</item>
     </style>

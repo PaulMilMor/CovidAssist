@@ -40,7 +40,6 @@ public class MainActivity<eventoAdapter> extends AppCompatActivity {
         db = new MyOpenHelper(this);
         eventos = db.getEventos();
         setupBottomMenu(savedInstanceState);
-
     }
 
     @Override

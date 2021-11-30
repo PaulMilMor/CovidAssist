@@ -97,7 +97,6 @@ public class CreateEventActivity extends AppCompatActivity {
                     db.updateEvento(editedEvento);
                     Toast.makeText(CreateEventActivity.this, "Se editó el evento", Toast.LENGTH_SHORT).show();
                 }
-
                 onBackPressed();
             }
         });
@@ -113,7 +112,5 @@ public class CreateEventActivity extends AppCompatActivity {
             capacityText.setText(""+editedEvento.getEventCapacity());
             createEventButton.setText("Editar Evento");
         }
-
-
     }
 }

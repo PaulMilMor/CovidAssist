@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.josemillanes.covidassist.CreateEventActivity;
+import com.josemillanes.covidassist.DetailsActivity;
 import com.josemillanes.covidassist.Evento;
 import com.josemillanes.covidassist.EventoAdapter;
 import com.josemillanes.covidassist.MyOpenHelper;
@@ -52,6 +54,14 @@ public class EventosFragment extends Fragment {
         EventoAdapter eventoAdapter = new EventoAdapter(context, R.layout.evento_list_item, eventos, db);
         eventosListView.setEmptyView(layout.findViewById(R.id.empty));
         eventosListView.setAdapter(eventoAdapter);
+        eventosListView.setClickable(true);
+        eventosListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(context, DetailsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         nuevoEventoButton = (FloatingActionButton) layout.findViewById(R.id.nuevo_evento_button);
         nuevoEventoButton.setOnClickListener(new View.OnClickListener() {

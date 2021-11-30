@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    tools:context=".CreateEventActivity">
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="125dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:text="Date"
+        android:textColor="#454545"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_text" />
+
+    <TextView
+        android:id="@+id/place_text"
+        android:layout_width="133dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_horizontal"
+        android:text="Place"
+        android:textColor="#454545"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_text" />
+
+    <TextView
+        android:id="@+id/description_text"
+        android:layout_width="324dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="68dp"
+        android:text="Description"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/place_text" />
+
+    <TextView
+        android:id="@+id/date_text4"
+        android:layout_width="158dp"
+        android:layout_height="24dp"
+        android:text="Descripción:"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/description_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/date_text5"
+        android:layout_width="158dp"
+        android:layout_height="24dp"
+        android:text="Asistentes/Capacidad:"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/capacity_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/capacity_text"
+        android:layout_width="322dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="52dp"
+        android:text="Assistants"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_text" />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="316dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#404040"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="19dp"
+        android:layout_height="21dp"
+        android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toTopOf="@+id/date_text4"
+        app:layout_constraintEnd_toStartOf="@+id/date_text"
+        app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/place_text"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/date_text"
+        app:layout_constraintTop_toBottomOf="@+id/title_text"
+        app:srcCompat="@android:drawable/ic_dialog_map" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

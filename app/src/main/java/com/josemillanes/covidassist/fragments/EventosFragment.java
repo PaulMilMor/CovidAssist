@@ -99,6 +99,7 @@ public class EventosFragment extends Fragment {
                 eventos = db.getMyEventos(usuario.getUserId());
                 break;
             case HISTORY_EVENTS:
+                eventos = db.getHistoryEventos(usuario.getUserId());
                 break;
         }
         EventoAdapter eventoAdapter = new EventoAdapter(context,R.layout.evento_list_item,eventos,db,usuario );

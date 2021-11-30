@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -49,6 +50,8 @@ public class CuestionarioActivity extends AppCompatActivity implements View.OnCl
     private int pregunta4Cantidad = 0;
 
     private Button enviarCuestionarioButton;
+
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +158,9 @@ public class CuestionarioActivity extends AppCompatActivity implements View.OnCl
 
               }
         });
+
+        Intent intent = getIntent();
+        usuario = (Usuario) intent.getSerializableExtra("usuario");
 
     }
     //método para cuando el usuario no asistirá al evento

@@ -18,7 +18,8 @@ public class Evento implements Serializable {
     private int eventCapacity;
     private int eventCreator;
     private boolean eventContagio;
-    private List<Usuario> eventAttendance;
+    private int eventAttendance;
+
 
     public int getEventId() {
         return eventId;
@@ -92,11 +93,11 @@ public class Evento implements Serializable {
         this.eventContagio = eventContagio;
     }
 
-    public List<Usuario> getEventAttendance() {
+    public int getEventAttendance() {
         return eventAttendance;
     }
 
-    public void setEventAttendance(List<Usuario> eventAttendance) {
+    public void setEventAttendance(int eventAttendance) {
         this.eventAttendance = eventAttendance;
     }
 
@@ -113,7 +114,7 @@ public class Evento implements Serializable {
         //this.eventAttendance = eventAttendance;   //List<Usuario>
     }
 
-    public Evento(String eventTitle, String eventDescription, String eventPlace, Date eventDate, String eventStatus, int eventCapacity, int eventCreator, boolean eventContagio, List<Usuario> eventAttendance) {
+    public Evento(String eventTitle, String eventDescription, String eventPlace, Date eventDate, String eventStatus, int eventCapacity, int eventCreator, boolean eventContagio, int eventAttendance) {
         this.eventTitle = eventTitle;
         this.eventDescription = eventDescription;
         this.eventPlace = eventPlace;
@@ -123,6 +124,7 @@ public class Evento implements Serializable {
         this.eventCreator = eventCreator;
         this.eventContagio = eventContagio;
         this.eventAttendance = eventAttendance;
+
     }
 
     public Map<String, Object> toMap(){
@@ -134,7 +136,6 @@ public class Evento implements Serializable {
         eventMap.put("eventCapacity",eventCapacity);
         eventMap.put("eventCreator",eventCreator);
         eventMap.put("eventContagio",eventContagio);
-        eventMap.put("eventAttendance",eventAttendance);
         return eventMap;
     }
 }

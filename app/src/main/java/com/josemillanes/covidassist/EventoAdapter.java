@@ -24,12 +24,14 @@ public class EventoAdapter extends BaseAdapter {
     private ArrayList<Evento> eventos;
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private MyOpenHelper db;
+    private Usuario usuario;
 
-    public EventoAdapter(Activity context, int layout, ArrayList<Evento> eventos, MyOpenHelper db) {
+    public EventoAdapter(Activity context, int layout, ArrayList<Evento> eventos, MyOpenHelper db, Usuario usuario) {
         this.context = context;
         this.layout = layout;
         this.eventos = eventos;
         this.db = db;
+        this.usuario = usuario;
     }
 
     @Override

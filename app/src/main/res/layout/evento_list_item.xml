@@ -51,4 +51,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+
+    <TextView
+        android:id="@+id/contagio_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hay Contagio"
+        android:textColor="@color/design_default_color_error"
+        app:layout_constraintEnd_toStartOf="@+id/evento_asistentes"
+        app:layout_constraintStart_toEndOf="@+id/evento_estatus"
+        tools:layout_editor_absoluteY="51dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

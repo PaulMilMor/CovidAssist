@@ -7,9 +7,6 @@
         android:id="@+id/opcion_asistencia"
         android:title="Marcar Asistencia"/>
     <item
-        android:id="@+id/opcion_asistentes"
-        android:title="Ver Asistentes"/>
-    <item
         android:id="@+id/opcion_contagio"
         android:title="Informar Contagio"/>
     <item

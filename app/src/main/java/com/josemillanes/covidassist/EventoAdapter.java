@@ -58,11 +58,13 @@ public class EventoAdapter extends BaseAdapter {
         String currentDate = dateFormat.format(eventos.get(position).getEventDate());
         String currentStatus = eventos.get(position).getEventStatus();
         String currentAsistentes = "Asistentes: " + eventos.get(position).getEventAttendance()+ "/" + eventos.get(position).getEventCapacity();
+        boolean currentContagio = eventos.get(position).isEventContagio();
 
         TextView tituloText = (TextView) v.findViewById(R.id.evento_titulo);
         TextView fechaText = (TextView) v.findViewById(R.id.evento_fecha);
         TextView statusText = (TextView) v.findViewById(R.id.evento_estatus);
         TextView asistentesText = (TextView) v.findViewById(R.id.evento_asistentes);
+        TextView contagioText = (TextView) v.findViewById(R.id.contagio_text);
 
         ImageButton opcionesButton = (ImageButton) v.findViewById(R.id.evento_opciones);
         opcionesButton.setOnClickListener(new View.OnClickListener() {
@@ -75,23 +77,39 @@ public class EventoAdapter extends BaseAdapter {
         fechaText.setText(currentDate);
         statusText.setText(currentStatus);
         asistentesText.setText(currentAsistentes);
+        if(currentContagio) {
+            contagioText.setVisibility(View.VISIBLE);
+        } else {
+            contagioText.setVisibility(View.INVISIBLE);
+        }
         return v;
     }
 
     private void showMoreActionsMenu(View view, Evento evento) {
         Context menuContext = this.context;
         PopupMenu optionsMenu = new PopupMenu(menuContext, view);
-        optionsMenu.getMenuInflater().inflate(R.menu.opcion_evento_items, optionsMenu.getMenu());
+        optionsMenu.getMenu().add("Ver Detalles");
+        if(db.hasAsistencia(evento.getEventId(),usuario.getUserId())) {
+            optionsMenu.getMenu().add("Quitar Asistencia");
+            if(!evento.isEventContagio()) optionsMenu.getMenu().add("Informar Contagio");
+        } else {
+            optionsMenu.getMenu().add("Marcar Asistencia");
+        }
+        if(evento.getEventCreator() == usuario.getUserId()) {
+            optionsMenu.getMenu().add("Editar Evento");
+            optionsMenu.getMenu().add("Eliminar Evento");
+        }
+        //optionsMenu.getMenuInflater().inflate(R.menu.opcion_evento_items, optionsMenu.getMenu());
         optionsMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                switch(menuItem.getItemId()) {
-                    case R.id.opcion_detalles:
+                switch(menuItem.getTitle().toString()) {
+                    case "Ver Detalles":
                         Intent intentdetails = new Intent(menuContext, DetailsActivity.class);
                         intentdetails.putExtra("evento",evento);
                         menuContext.startActivity(intentdetails);
                         break;
-                    case R.id.opcion_asistencia:
+                   case "Marcar Asistencia":
                         if(evento.getEventAttendance() < evento.getEventCapacity()) {
                             Intent intentCuestionario = new Intent(menuContext, CuestionarioActivity.class);
                             intentCuestionario.putExtra("usuario", usuario);
@@ -102,16 +120,24 @@ public class EventoAdapter extends BaseAdapter {
                             Toast.makeText(context, "Este evento ya alcanzó su máxima capacidad", Toast.LENGTH_SHORT).show();
                         }
                         break;
-                    case R.id.opcion_asistentes:
+                    case "Quitar Asistencia":
+                        db.removerAsistencia(usuario.getUserId(), evento.getEventId());
+                        evento.setEventAttendance(evento.getEventAttendance() - 1 );
+                        notifyDataSetChanged();
                         break;
-                    case R.id.opcion_contagio:
+                    case "Informar Contagio":
+                        //Aquí iría un dialogo por si si o por si no
+                        //las siguientes lineas irian en el si
+                        evento.setEventContagio(true);
+                        db.updateEvento(evento);
+                        notifyDataSetChanged();
                         break;
-                    case R.id.opcion_editar:
+                    case "Editar Evento":
                         Intent intentForm = new Intent(menuContext, CreateEventActivity.class);
                         intentForm.putExtra("evento",evento);
                         menuContext.startActivity(intentForm);
                         break;
-                    case R.id.opcion_eliminar:
+                    case "Eliminar Evento":
                         Toast.makeText(context, "Se eliminó el evento", Toast.LENGTH_SHORT).show();
                         db.deleteEvento(evento.getEventId());
                         eventos.remove(evento);

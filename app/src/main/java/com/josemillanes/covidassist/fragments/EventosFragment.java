@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,7 @@ import com.josemillanes.covidassist.Evento;
 import com.josemillanes.covidassist.EventoAdapter;
 import com.josemillanes.covidassist.MyOpenHelper;
 import com.josemillanes.covidassist.R;
+import com.josemillanes.covidassist.Usuario;
 
 import java.util.ArrayList;
 
@@ -28,13 +30,22 @@ public class EventosFragment extends Fragment {
     private ArrayList<Evento> eventos;
     private MyOpenHelper db;
     private Activity context;
+    private Usuario usuario;
+
+    private final int ALL_EVENTS = 0;
+    private final int MY_EVENTS = 1;
+    private final int HISTORY_EVENTS = 2;
+
+    private int selected;
 
     private FloatingActionButton nuevoEventoButton;
 
-    public EventosFragment(ArrayList<Evento> eventos, MyOpenHelper db, Activity context) {
+    public EventosFragment(ArrayList<Evento> eventos, MyOpenHelper db,Usuario usuario, Activity context, int selected) {
         this.eventos = eventos;
         this.db = db;
         this.context = context;
+        this.usuario = usuario;
+        this.selected = selected;
     }
     public EventosFragment(ArrayList<Evento> eventos,  Activity context) {
         this.eventos = eventos;
@@ -51,7 +62,7 @@ public class EventosFragment extends Fragment {
 
         eventosListView = (ListView) layout.findViewById(R.id.eventos_list);
 
-        EventoAdapter eventoAdapter = new EventoAdapter(context, R.layout.evento_list_item, eventos, db);
+        EventoAdapter eventoAdapter = new EventoAdapter(context, R.layout.evento_list_item, eventos, db,usuario);
         eventosListView.setEmptyView(layout.findViewById(R.id.empty));
         eventosListView.setAdapter(eventoAdapter);
         eventosListView.setClickable(true);
@@ -67,7 +78,9 @@ public class EventosFragment extends Fragment {
         nuevoEventoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(context, ""+usuario.getUserId(),Toast.LENGTH_SHORT).show();
                 Intent intentForm = new Intent(context, CreateEventActivity.class);
+                intentForm.putExtra("usuario", usuario);
                 startActivity(intentForm);
             }
         });
@@ -78,8 +91,17 @@ public class EventosFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        eventos = db.getEventos();
-        EventoAdapter eventoAdapter = new EventoAdapter(context,R.layout.evento_list_item,eventos,db);
+        switch(selected) {
+            case ALL_EVENTS:
+                eventos = db.getEventos();
+                break;
+            case MY_EVENTS:
+                eventos = db.getMyEventos(usuario.getUserId());
+                break;
+            case HISTORY_EVENTS:
+                break;
+        }
+        EventoAdapter eventoAdapter = new EventoAdapter(context,R.layout.evento_list_item,eventos,db,usuario );
         eventosListView.setAdapter(eventoAdapter);
     }
 

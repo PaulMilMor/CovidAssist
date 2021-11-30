@@ -186,6 +186,18 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
         return asistencia;
     }
 
+    public boolean hasAsistencia(int evento_id, int usuario_id) {
+        int count = 0;
+        Cursor c = db.rawQuery("select exists(select usuario_id from asistencia where usuario_id ="+usuario_id+" and evento_id = "+evento_id+")",null);
+        if(c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            do {
+                count += c.getInt(0);
+            } while(c.moveToNext());
+        }
+        return count==1;
+    }
+
     public ArrayList<Evento> getMyEventos(int id) {
         ArrayList<Evento> eventos = new ArrayList<>();
         Cursor c = db.rawQuery("select evento_id, evento_titulo,evento_descripcion, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio from eventos  where evento_creador="+id+" order by evento_fecha ASC",null);
@@ -253,6 +265,11 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
         db.insert("asistencia",null,cv);
     }
+    public void removerAsistencia(int usuario_id, int evento_id) {
+        String[] args = new String[]{String.valueOf(usuario_id),String.valueOf(evento_id)};
+        db.delete("asistencia","usuario_id=? and evento_id=?",args);
+    }
+
 
     public MyOpenHelper open() throws SQLException {
         db = DbHelper.getWritableDatabase();

@@ -87,7 +87,7 @@ public class CreateEventActivity extends AppCompatActivity {
                             //Aquí es necesario obtener el id del usuario que crea el evento
                             usuario.getUserId(),
                             false,
-                            attendants
+                            0
                     );
                     db.insertEvento(evento);
                     Toast.makeText(CreateEventActivity.this,"Se creó el evento", Toast.LENGTH_SHORT).show();

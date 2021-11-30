@@ -143,7 +143,49 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
     public ArrayList<Evento> getEventos() {
         ArrayList<Evento> eventos = new ArrayList<>();
-        Cursor c = db.rawQuery("select evento_id, evento_titulo,evento_descripcion, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio from eventos",null);
+        Cursor c = db.rawQuery("select evento_id, evento_titulo,evento_descripcion, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio from eventos order by evento_fecha ASC",null);
+        if(c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            Log.d("DEBUGGEATE",c.toString());
+            do {
+              /*  Log.d("DEBUGGEATE",c.toString());
+                int id = c.getInt(0);
+                Log.d("DASDAS", String.valueOf(id));*/
+                Evento evento = new Evento(
+                        c.getInt(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        new Date(c.getLong(4)),
+                        c.getString(5),
+                        c.getInt(6),
+                        c.getInt(7),
+
+                        c.getInt(8) == 1
+                );
+                evento.setEventAttendance(getAsistencia(evento.getEventId()));
+                eventos.add(evento);
+            } while(c.moveToNext());
+        }
+        c.close();
+        return eventos;
+    }
+
+    public int getAsistencia(int evento_id) {
+        int asistencia = 0;
+        Cursor c = db.rawQuery("select count(usuario_id) from asistencia where evento_id = "+evento_id, null);
+        if(c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            do {
+                asistencia += c.getInt(0);
+            } while(c.moveToNext());
+        }
+        return asistencia;
+    }
+
+    public ArrayList<Evento> getMyEventos(int id) {
+        ArrayList<Evento> eventos = new ArrayList<>();
+        Cursor c = db.rawQuery("select evento_id, evento_titulo,evento_descripcion, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio from eventos  where evento_creador="+id+" order by evento_fecha ASC",null);
         if(c != null && c.getCount() > 0) {
             c.moveToFirst();
             Log.d("DEBUGGEATE",c.toString());
@@ -170,7 +212,13 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
         return eventos;
     }
 
-    //Resgitrar usuario
+    public void marcarAsistencia(int usuario_id, int evento_id) {
+        ContentValues cv = new ContentValues();
+        cv.put("usuario_id",usuario_id);
+        cv.put("evento_id",evento_id);
+
+        db.insert("asistencia",null,cv);
+    }
 
     public MyOpenHelper open() throws SQLException {
         db = DbHelper.getWritableDatabase();

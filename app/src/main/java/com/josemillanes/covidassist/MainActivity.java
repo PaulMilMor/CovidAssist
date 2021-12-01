@@ -88,7 +88,7 @@ public class MainActivity<eventoAdapter> extends AppCompatActivity {
 
                     break;
                 case R.id.action_profile:
-                    showFragment(new ProfileFragment());
+                    showFragment(new ProfileFragment(db,usuario,this));
                     break;
             }
             return true;

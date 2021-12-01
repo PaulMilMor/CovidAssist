@@ -21,8 +21,9 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "eventos.sqlite";
     private static final int DB_VERSION = 1;
+    private static SQLiteDatabase db;
 
-    private SQLiteDatabase db;
+   // private SQLiteDatabase db;
     private Context myContext;
     public static  final String IMAGE = "usuario_img";
     private DatabaseHelper DbHelper;
@@ -90,16 +91,15 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
     //Métodos para insertar, actualizar y eliminar usuarios y eventos
     //Para leer las tablas hay distintos casos así que se crearán los métodos sobre la marcha
 
-    public void updateUsuario(Usuario usuario) {
+    public void updateUsuario(int id, String nombre, String correo, String contra) {
         ContentValues cv = new ContentValues();
-        cv.put("usuario_id", usuario.getUserId());
-        cv.put("usuario_nombre",usuario.getUserName());
-        cv.put("usuario_correo",usuario.getUserEmail());
-        //Nota: tal vez sea necesario cambiar el tipo de useriImg
-        cv.put("usuario_img", usuario.getUserImg());
-        String whereClause = "usuario_id=?";
-        String whereArgs[] = {""+usuario.getUserId()};
-        db.update("usuarios", cv, whereClause, whereArgs);
+
+        cv.put("usuario_id", id);
+        cv.put("usuario_nombre",nombre);
+        cv.put("usuario_correo",correo);
+        cv.put("usuario_contraseña",contra);
+
+        db.update("usuarios", cv, "usuario_id= "+id, null);
     }
 
     public void deleteUsuario(int id) {
@@ -303,4 +303,22 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
         cur.close();
         return null;
     }
+
+    public static Usuario verUsuario(int id){
+
+        Usuario usuario = null;
+        Cursor cursor;
+
+        cursor = db.rawQuery("SELECT usuario_nombre, usuario_correo, usuario_contraseña FROM "+ "usuarios" + " WHERE usuario_id = "+ id , null);
+        if (cursor.moveToFirst()){
+            usuario = new Usuario();
+            usuario.setUserName(cursor.getString(0));
+            usuario.setUserEmail(cursor.getString(1));
+            usuario.setUserPassword(cursor.getString(2));
+        }
+
+        cursor.close();
+        return usuario;
+    }
+
 }

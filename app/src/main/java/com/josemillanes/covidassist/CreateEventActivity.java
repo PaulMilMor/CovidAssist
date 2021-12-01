@@ -84,7 +84,6 @@ public class CreateEventActivity extends AppCompatActivity {
                             selectedDate,
                             "Planeado",
                             Integer.parseInt(capacityText.getText().toString()),
-                            //Aquí es necesario obtener el id del usuario que crea el evento
                             usuario.getUserId(),
                             false,
                             0
@@ -110,7 +109,6 @@ public class CreateEventActivity extends AppCompatActivity {
         if(editedEvento != null) {
             titleView.setText("Editar Evento");
             titleText.setText(editedEvento.getEventTitle());
-            //No existe el campo descripción en la base de datos
             descriptionText.setText(editedEvento.getEventDescription());
             placeText.setText(editedEvento.getEventPlace());
             selectedDate = editedEvento.getEventDate();

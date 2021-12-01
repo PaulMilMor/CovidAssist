@@ -78,7 +78,6 @@ public class EventosFragment extends Fragment {
         nuevoEventoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, ""+usuario.getUserId(),Toast.LENGTH_SHORT).show();
                 Intent intentForm = new Intent(context, CreateEventActivity.class);
                 intentForm.putExtra("usuario", usuario);
                 startActivity(intentForm);

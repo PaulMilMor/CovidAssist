@@ -203,7 +203,6 @@ public class CuestionarioActivity extends AppCompatActivity implements View.OnCl
             case R.id.pregunta2Aire:
             case R.id.pregunta2Olfato:
             case R.id.pregunta2Articulaciones:
-                //Toast.makeText(CuestionarioActivity.this, ""+pregunta2,Toast.LENGTH_SHORT).show();
                 CheckBox checkBoxP2 = (CheckBox) view;
                 if(checkBoxP2.isChecked()) {
                     if(pregunta2Cantidad < 6) {

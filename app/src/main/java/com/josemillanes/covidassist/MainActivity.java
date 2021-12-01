@@ -52,10 +52,6 @@ public class MainActivity<eventoAdapter> extends AppCompatActivity {
         all_eventos = db.getEventos();
         my_eventos = db.getMyEventos(usuario.getUserId());
         history_eventos = db.getHistoryEventos(usuario.getUserId());
-
-        if(usuario != null) {
-            Toast.makeText(this, ""+usuario.getUserId(), Toast.LENGTH_SHORT).show();
-        }
         setupBottomMenu(savedInstanceState);
     }
 
@@ -75,9 +71,7 @@ public class MainActivity<eventoAdapter> extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.action_home:
-                   //showFragment(new EventosFragment());
                     showFragment(new EventosFragment(all_eventos, db,usuario,this,ALL_EVENTS));
-                    //showFragment(PageFragment.newInstance(R.drawable.ic_baseline_home_24));
                     break;
                 case R.id.action_myevents:
                     showFragment(new EventosFragment(my_eventos, db,usuario,this,MY_EVENTS));

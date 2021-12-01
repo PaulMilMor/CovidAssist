@@ -135,8 +135,7 @@ public class EventoAdapter extends BaseAdapter {
                         notifyDataSetChanged();
                         break;
                     case "Informar Contagio":
-                        //Aquí iría un dialogo por si si o por si no
-                        //las siguientes lineas irian en el si
+
                     final Dialog dialog = new Dialog(menuContext);
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog.setCancelable(true);

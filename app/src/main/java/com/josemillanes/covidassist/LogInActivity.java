@@ -42,15 +42,14 @@ public class LogInActivity extends AppCompatActivity {
                         Intent intentLogin = new Intent (LogInActivity.this, MainActivity.class);
                         Usuario usuario = new Usuario(results[1],u,p);
                         intentLogin.putExtra("usuario",usuario);
+                        intentLogin.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
+
                         startActivity(intentLogin);
                     } else{
                         Toast.makeText(LogInActivity.this,"Usuario y/o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                     }
                 }
-               /* else if (1 == DbHelper.login(u, p)[0]){
 
-
-                }*/
             }
         });
 

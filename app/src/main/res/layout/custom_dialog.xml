@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Reportar contagio"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/name_et"
+        android:layout_width="match_parent"
+        android:layout_height="116dp"
+        android:gravity="start"
+        android:hint="Describa brevemente sus sintomas"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/age_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Edad"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/terms_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Confirmo que estuve en este evento"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="?attr/colorPrimary"
+        android:text="Reportar"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+</LinearLayout>

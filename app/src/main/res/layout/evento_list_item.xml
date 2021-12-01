@@ -12,25 +12,20 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/evento_estatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/evento_titulo"
-        app:layout_constraintTop_toBottomOf="@+id/evento_titulo" />
 
     <TextView
         android:id="@+id/evento_fecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/evento_opciones"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,8 +33,9 @@
         android:id="@+id/evento_asistentes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/evento_fecha"
         app:layout_constraintTop_toBottomOf="@+id/evento_fecha" />
 
@@ -56,9 +52,8 @@
         android:id="@+id/contagio_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hay Contagio"
+        android:text="Se informó un contagio"
         android:textColor="@color/design_default_color_error"
-        app:layout_constraintEnd_toStartOf="@+id/evento_asistentes"
-        app:layout_constraintStart_toEndOf="@+id/evento_estatus"
-        tools:layout_editor_absoluteY="51dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/evento_asistentes"
+        app:layout_constraintStart_toStartOf="@+id/evento_titulo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_create_event.xml" value="0.33" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_cuestionario.xml" value="0.17753623188405798" />

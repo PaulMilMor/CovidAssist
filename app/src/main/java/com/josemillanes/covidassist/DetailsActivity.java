@@ -35,7 +35,6 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_event);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         db = new MyOpenHelper(this);
 
         titleText = (TextView) findViewById(R.id.title_text);
@@ -48,10 +47,9 @@ public class DetailsActivity extends AppCompatActivity {
         editedEvento = (Evento) intent.getSerializableExtra("evento");
         if(editedEvento != null) {
             titleText.setText(editedEvento.getEventTitle());
-            //No existe el campo descripción en la base de datos
-            descriptionText.setText(editedEvento.getEventTitle());
+            descriptionText.setText(editedEvento.getEventDescription());
             placeText.setText(editedEvento.getEventPlace());
-            selectedDate = editedEvento.getEventDate();
+            //dateText.setText((CharSequence) editedEvento.getEventDate());
             capacityText.setText(""+editedEvento.getEventCapacity());
 
         }

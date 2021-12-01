@@ -17,7 +17,7 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
     private static final String EVENTS_TABLE_CREATE = "CREATE TABLE eventos (evento_id INTEGER PRIMARY KEY AUTOINCREMENT, evento_titulo TEXT, evento_descripcion TEXT, evento_lugar TEXT, evento_fecha INTEGER, evento_status STRING, evento_maxcap INTEGER, evento_creador INTEGER, evento_contagio INTEGER)";
     private static final String ASSISTANCE_TABLE_CREATE = "CREATE TABLE asistencia (usuario_id INTEGER, evento_id INTEGER, FOREIGN KEY(usuario_id) REFERENCES usuarios(usuario_id), FOREIGN KEY(evento_id) REFERENCES eventos(evento_id))";
 
-    private static final String EVENTS_TABLE_INSERT = "INSERT INTO eventos(evento_titulo, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio) VALUES('Posada','Oficina',1637481546004, 'Planeado',30,1,0)";
+    private static final String EVENTS_TABLE_INSERT = "INSERT INTO eventos(evento_titulo, evento_descripcion, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio) VALUES('Posada','Oficina',1637481546004, 'Planeado',30,1,0)";
 
     private static final String DB_NAME = "eventos.sqlite";
     private static final int DB_VERSION = 1;
@@ -146,7 +146,7 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
     public ArrayList<Evento> getEventos() {
         ArrayList<Evento> eventos = new ArrayList<>();
-        Cursor c = db.rawQuery("select evento_id, evento_titulo,evento_descripcion, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio from eventos order by evento_fecha ASC",null);
+        Cursor c = db.rawQuery("select evento_id, evento_titulo, evento_descripcion, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio from eventos order by evento_fecha ASC",null);
         if(c != null && c.getCount() > 0) {
             c.moveToFirst();
             Log.d("DEBUGGEATE",c.toString());
@@ -200,7 +200,7 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
     public ArrayList<Evento> getMyEventos(int id) {
         ArrayList<Evento> eventos = new ArrayList<>();
-        Cursor c = db.rawQuery("select evento_id, evento_titulo,evento_descripcion, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio from eventos  where evento_creador="+id+" order by evento_fecha ASC",null);
+        Cursor c = db.rawQuery("select evento_id, evento_titulo, evento_descripcion, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio from eventos  where evento_creador="+id+" order by evento_fecha ASC",null);
         if(c != null && c.getCount() > 0) {
             c.moveToFirst();
             Log.d("DEBUGGEATE",c.toString());

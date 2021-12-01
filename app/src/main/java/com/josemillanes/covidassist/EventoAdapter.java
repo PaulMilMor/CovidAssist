@@ -12,12 +12,21 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class EventoAdapter extends BaseAdapter {
+
+    Button openDialog;
+    TextView infoTv;
 
     private Activity context;
     private int layout;
@@ -103,10 +112,12 @@ public class EventoAdapter extends BaseAdapter {
         optionsMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
+
                 switch(menuItem.getTitle().toString()) {
                     case "Ver Detalles":
+
                         Intent intentdetails = new Intent(menuContext, DetailsActivity.class);
-                        intentdetails.putExtra("evento",evento);
+                        intentdetails.putExtra("evento", evento);
                         menuContext.startActivity(intentdetails);
                         break;
                    case "Marcar Asistencia":
@@ -120,6 +131,7 @@ public class EventoAdapter extends BaseAdapter {
                             Toast.makeText(context, "Este evento ya alcanzó su máxima capacidad", Toast.LENGTH_SHORT).show();
                         }
                         break;
+
                     case "Quitar Asistencia":
                         db.removerAsistencia(usuario.getUserId(), evento.getEventId());
                         evento.setEventAttendance(evento.getEventAttendance() - 1 );
@@ -128,9 +140,29 @@ public class EventoAdapter extends BaseAdapter {
                     case "Informar Contagio":
                         //Aquí iría un dialogo por si si o por si no
                         //las siguientes lineas irian en el si
+                    final Dialog dialog = new Dialog(menuContext);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setCancelable(true);
+                        dialog.setContentView(R.layout.custom_dialog);
+                        final EditText nameEt = dialog.findViewById(R.id.name_et);
+                        final EditText ageEt = dialog.findViewById(R.id.age_et);
+                        final CheckBox termsCb = dialog.findViewById(R.id.terms_cb);
+                        Button submitButton = dialog.findViewById(R.id.submit_button);
+
+                        submitButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String name = nameEt.getText().toString();
+                                String age = ageEt.getText().toString();
+                                Boolean hasAccepted = termsCb.isChecked();
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.show();
                         evento.setEventContagio(true);
                         db.updateEvento(evento);
                         notifyDataSetChanged();
+
                         break;
                     case "Editar Evento":
                         Intent intentForm = new Intent(menuContext, CreateEventActivity.class);

@@ -29,7 +29,6 @@ import java.util.List;
 
 public class MainActivity<eventoAdapter> extends AppCompatActivity {
 
-
     private static final String SELECTION = "SELECTION";
     private BottomNavigationView bottomNavigationView;
 

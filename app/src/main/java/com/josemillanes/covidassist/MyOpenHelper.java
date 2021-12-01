@@ -21,8 +21,9 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "eventos.sqlite";
     private static final int DB_VERSION = 1;
+    private static SQLiteDatabase db;
 
-    private SQLiteDatabase db;
+   // private SQLiteDatabase db;
     private Context myContext;
     public static  final String IMAGE = "usuario_img";
     private DatabaseHelper DbHelper;
@@ -90,16 +91,15 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
     //Métodos para insertar, actualizar y eliminar usuarios y eventos
     //Para leer las tablas hay distintos casos así que se crearán los métodos sobre la marcha
 
-    public void updateUsuario(Usuario usuario) {
+    public void updateUsuario(int id, String nombre, String correo, String contra) {
         ContentValues cv = new ContentValues();
-        cv.put("usuario_id", usuario.getUserId());
-        cv.put("usuario_nombre",usuario.getUserName());
-        cv.put("usuario_correo",usuario.getUserEmail());
-        //Nota: tal vez sea necesario cambiar el tipo de useriImg
-        cv.put("usuario_img", usuario.getUserImg());
-        String whereClause = "usuario_id=?";
-        String whereArgs[] = {""+usuario.getUserId()};
-        db.update("usuarios", cv, whereClause, whereArgs);
+
+        cv.put("usuario_id", id);
+        cv.put("usuario_nombre",nombre);
+        cv.put("usuario_correo",correo);
+        cv.put("usuario_contraseña",contra);
+
+        db.update("usuarios", cv, "usuario_id= "+id, null);
     }
 
     public void deleteUsuario(int id) {
@@ -186,6 +186,18 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
         return asistencia;
     }
 
+    public boolean hasAsistencia(int evento_id, int usuario_id) {
+        int count = 0;
+        Cursor c = db.rawQuery("select exists(select usuario_id from asistencia where usuario_id ="+usuario_id+" and evento_id = "+evento_id+")",null);
+        if(c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            do {
+                count += c.getInt(0);
+            } while(c.moveToNext());
+        }
+        return count==1;
+    }
+
     public ArrayList<Evento> getMyEventos(int id) {
         ArrayList<Evento> eventos = new ArrayList<>();
         Cursor c = db.rawQuery("select evento_id, evento_titulo, evento_descripcion, evento_lugar, evento_fecha, evento_status, evento_maxcap, evento_creador, evento_contagio from eventos  where evento_creador="+id+" order by evento_fecha ASC",null);
@@ -208,6 +220,37 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
                         c.getInt(8) == 1
                 );
+                evento.setEventAttendance(getAsistencia(evento.getEventId()));
+                eventos.add(evento);
+            } while(c.moveToNext());
+        }
+        c.close();
+        return eventos;
+    }
+
+    public ArrayList<Evento> getHistoryEventos(int usuarioId) {
+        ArrayList<Evento> eventos = new ArrayList<>();
+        Cursor c = db.rawQuery("select * from eventos as e inner join asistencia as a where e.evento_id = a.evento_id and a.usuario_id="+usuarioId+" order by evento_fecha ASC",null);
+        if(c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            Log.d("DEBUGGEATE",c.toString());
+            do {
+              /*  Log.d("DEBUGGEATE",c.toString());
+                int id = c.getInt(0);
+                Log.d("DASDAS", String.valueOf(id));*/
+                Evento evento = new Evento(
+                        c.getInt(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        new Date(c.getLong(4)),
+                        c.getString(5),
+                        c.getInt(6),
+                        c.getInt(7),
+
+                        c.getInt(8) == 1
+                );
+                evento.setEventAttendance(getAsistencia(evento.getEventId()));
                 eventos.add(evento);
             } while(c.moveToNext());
         }
@@ -222,6 +265,11 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
         db.insert("asistencia",null,cv);
     }
+    public void removerAsistencia(int usuario_id, int evento_id) {
+        String[] args = new String[]{String.valueOf(usuario_id),String.valueOf(evento_id)};
+        db.delete("asistencia","usuario_id=? and evento_id=?",args);
+    }
+
 
     public MyOpenHelper open() throws SQLException {
         db = DbHelper.getWritableDatabase();
@@ -255,4 +303,22 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
         cur.close();
         return null;
     }
+
+    public static Usuario verUsuario(int id){
+
+        Usuario usuario = null;
+        Cursor cursor;
+
+        cursor = db.rawQuery("SELECT usuario_nombre, usuario_correo, usuario_contraseña FROM "+ "usuarios" + " WHERE usuario_id = "+ id , null);
+        if (cursor.moveToFirst()){
+            usuario = new Usuario();
+            usuario.setUserName(cursor.getString(0));
+            usuario.setUserEmail(cursor.getString(1));
+            usuario.setUserPassword(cursor.getString(2));
+        }
+
+        cursor.close();
+        return usuario;
+    }
+
 }

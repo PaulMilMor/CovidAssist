@@ -3,10 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_detail_event.xml" value="0.33" />
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/custom_dialog.xml" value="0.33" />
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/evento_list_item.xml" value="0.14447463768115942" />
-        <entry key="..\:/Users/daniel/Documents/AndroidStudioProjects/CovidAssist/app/src/main/res/menu/opcion_evento_items.xml" value="0.20416666666666666" />
+
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_create_event.xml" value="0.33" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/activity_cuestionario.xml" value="0.17753623188405798" />
@@ -18,6 +15,7 @@
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/fragment.xml" value="0.1503623188405797" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/fragment_eventos.xml" value="0.25" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/fragment_page.xml" value="0.14492753623188406" />
+        <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/menu/evento_items.xml" value="0.225" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/menu/my_navigation_items.xml" value="0.225" />
         <entry key="..\:/Users/sebas/AndroidStudioProjects/CovidAssist/app/src/main/res/menu/opcion_evento_items.xml" value="0.225" />

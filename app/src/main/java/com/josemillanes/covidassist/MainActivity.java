@@ -51,6 +51,7 @@ public class MainActivity<eventoAdapter> extends AppCompatActivity {
         usuario = (Usuario) intent.getSerializableExtra("usuario");
         all_eventos = db.getEventos();
         my_eventos = db.getMyEventos(usuario.getUserId());
+        history_eventos = db.getHistoryEventos(usuario.getUserId());
 
         if(usuario != null) {
             Toast.makeText(this, ""+usuario.getUserId(), Toast.LENGTH_SHORT).show();
@@ -63,6 +64,8 @@ public class MainActivity<eventoAdapter> extends AppCompatActivity {
         super.onResume();
         all_eventos = db.getEventos();
         my_eventos = db.getMyEventos(usuario.getUserId());
+        history_eventos = db.getHistoryEventos(usuario.getUserId());
+
         EventoAdapter eventoAdapter = new EventoAdapter(this,R.layout.evento_list_item,all_eventos,db, usuario);
 
     }
@@ -80,10 +83,11 @@ public class MainActivity<eventoAdapter> extends AppCompatActivity {
                     showFragment(new EventosFragment(my_eventos, db,usuario,this,MY_EVENTS));
                     break;
                 case R.id.action_history:
-                    showFragment(PageFragment.newInstance(R.drawable.ic_baseline_history_24));
+                    showFragment(new EventosFragment(history_eventos, db,usuario,this,HISTORY_EVENTS));
+
                     break;
                 case R.id.action_profile:
-                    showFragment(new ProfileFragment());
+                    showFragment(new ProfileFragment(db,usuario,this));
                     break;
             }
             return true;

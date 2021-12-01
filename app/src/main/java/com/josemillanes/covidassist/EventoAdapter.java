@@ -65,13 +65,11 @@ public class EventoAdapter extends BaseAdapter {
         v = layoutInflater.inflate(R.layout.evento_list_item,null);
         String currentTitle = eventos.get(position).getEventTitle();
         String currentDate = dateFormat.format(eventos.get(position).getEventDate());
-        String currentStatus = eventos.get(position).getEventStatus();
         String currentAsistentes = "Asistentes: " + eventos.get(position).getEventAttendance()+ "/" + eventos.get(position).getEventCapacity();
         boolean currentContagio = eventos.get(position).isEventContagio();
 
         TextView tituloText = (TextView) v.findViewById(R.id.evento_titulo);
         TextView fechaText = (TextView) v.findViewById(R.id.evento_fecha);
-        TextView statusText = (TextView) v.findViewById(R.id.evento_estatus);
         TextView asistentesText = (TextView) v.findViewById(R.id.evento_asistentes);
         TextView contagioText = (TextView) v.findViewById(R.id.contagio_text);
 
@@ -84,7 +82,6 @@ public class EventoAdapter extends BaseAdapter {
         });
         tituloText.setText(currentTitle);
         fechaText.setText(currentDate);
-        statusText.setText(currentStatus);
         asistentesText.setText(currentAsistentes);
         if(currentContagio) {
             contagioText.setVisibility(View.VISIBLE);
@@ -138,8 +135,7 @@ public class EventoAdapter extends BaseAdapter {
                         notifyDataSetChanged();
                         break;
                     case "Informar Contagio":
-                        //Aquí iría un dialogo por si si o por si no
-                        //las siguientes lineas irian en el si
+
                     final Dialog dialog = new Dialog(menuContext);
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog.setCancelable(true);
@@ -155,13 +151,14 @@ public class EventoAdapter extends BaseAdapter {
                                 String name = nameEt.getText().toString();
                                 String age = ageEt.getText().toString();
                                 Boolean hasAccepted = termsCb.isChecked();
+                                evento.setEventContagio(true);
+                                db.updateEvento(evento);
+                                notifyDataSetChanged();
                                 dialog.dismiss();
                             }
                         });
                         dialog.show();
-                        evento.setEventContagio(true);
-                        db.updateEvento(evento);
-                        notifyDataSetChanged();
+
 
                         break;
                     case "Editar Evento":

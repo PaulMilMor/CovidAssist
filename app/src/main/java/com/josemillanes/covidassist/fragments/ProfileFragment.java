@@ -97,6 +97,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
 
                 Intent intentcerrar = new Intent(context, LogInActivity.class);
+                intentcerrar.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
                 startActivity(intentcerrar);
             }
         });
@@ -109,6 +110,8 @@ public class ProfileFragment extends Fragment {
                 db.deleteUsuario(id);
 
                 Intent intentForm = new Intent(context, LogInActivity.class);
+                intentForm.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
+
                 startActivity(intentForm);
             }
         });

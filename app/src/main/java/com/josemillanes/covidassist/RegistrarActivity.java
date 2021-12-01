@@ -31,7 +31,6 @@ public class RegistrarActivity extends AppCompatActivity {
     private static final String TAG = "RegistrarActivity";
     ConstraintLayout lnrLyt;
     private Button registrar;
-    private FloatingActionButton subirFoto;
     private EditText nombreUsuario, correoUsuario, contraseñaUsuario;
     private ImageView imagenUsuario;
     Uri selectImageUri;
@@ -43,7 +42,6 @@ public class RegistrarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registrar);
 
         lnrLyt = findViewById(R.id.layout);
-        subirFoto = (FloatingActionButton) findViewById(R.id.imagen_button);
         registrar = (Button) findViewById(R.id.registrar_button);
         nombreUsuario = (EditText) findViewById(R.id.nombre_text);
         correoUsuario = (EditText) findViewById(R.id.correo_text);
@@ -53,40 +51,12 @@ public class RegistrarActivity extends AppCompatActivity {
 
         dbHelper = new MyOpenHelper(RegistrarActivity.this);
 
-        subirFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                if (hasStoragePermission(RegistrarActivity.this)) {
-                    openImageChooser();
-                } else {
-                    ActivityCompat.requestPermissions(((AppCompatActivity) RegistrarActivity.this), new String[]{
-                            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
-                }
-            }
-
-            private void openImageChooser() {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Selecciona una imagen"), SELECT_PICTURE);
-            }
-
-            private boolean hasStoragePermission(Context context) {
-                int read = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);
-                return read == PackageManager.PERMISSION_GRANTED;
-            }
-
-        });
 
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nombreImagen = (String) imagenUsuario.getTag();
 
-                if (nombreImagen.equals("ImagenAntigua")){
-                    showMessage("Te falto escoger una imagen de perfil");
-                }
 
                 if (nombreUsuario.getText().toString().equals("") || contraseñaUsuario.getText().toString().equals("") || correoUsuario.getText().toString().equals("")) {
                     showMessage("Te falto llenar los datos ");
@@ -100,6 +70,8 @@ public class RegistrarActivity extends AppCompatActivity {
 
                         Intent in = new Intent (RegistrarActivity.this,MainActivity.class);
                         in.putExtra("usuario", usuario);
+                        in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
+
                         startActivity(in);
                     }
             }
@@ -124,11 +96,9 @@ public class RegistrarActivity extends AppCompatActivity {
     private boolean guardarImagen(Uri selectImageUri) {
         try {
             dbHelper.open();
-            InputStream stream = getContentResolver().openInputStream(selectImageUri);
-            byte[] inputData = Utils.getBytes(stream);
 
             dbHelper.insertUsuario(nombreUsuario.getText().toString(), correoUsuario.getText().toString(),
-                    contraseñaUsuario.getText().toString(), inputData);
+                    contraseñaUsuario.getText().toString());
 
             dbHelper.close();
             return true;

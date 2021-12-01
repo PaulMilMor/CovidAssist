@@ -282,12 +282,12 @@ public class MyOpenHelper  extends SQLiteOpenHelper {
 
 
 
-    public void insertUsuario(String nombre, String correo, String contra, byte[] imageBytes){
+    public void insertUsuario(String nombre, String correo, String contra){
         ContentValues cv = new ContentValues();
         cv.put("usuario_nombre",nombre);
         cv.put("usuario_correo",correo);
         cv.put("usuario_contraseña",contra);
-        cv.put("usuario_img", imageBytes);
+        cv.put("usuario_img", "a");
         db.insert("usuarios",null,cv);
     }
 
